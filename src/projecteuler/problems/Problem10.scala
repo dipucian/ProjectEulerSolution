@@ -1,3 +1,5 @@
+package projecteuler.problems
+
 import util.prime.PrimeUtil._
 
 object Problem10 {

@@ -1,3 +1,5 @@
+package projecteuler.problems
+
 import math._
 import math.{BigInt => Int}
 

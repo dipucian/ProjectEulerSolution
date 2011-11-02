@@ -1,3 +1,5 @@
+package projecteuler.problems
+
 object Problem8 {
 	def main(args: Array[String]): Unit = {
 		val digits = List(
