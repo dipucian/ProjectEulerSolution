@@ -10,24 +10,18 @@ object Problem354 {
 		var solutions = List[Pair[Int, Int]]()
 		var max = 0
 		var count = 0
-		var i = 1
-		var y = 0
+		var i:Int = 0
+		var y:Int = 0
 		do {
 			y = i * i
 			count = countForY(y)
-			max = if (count > max) {
-				println((System.currentTimeMillis() - start)+"ms "+"\ty: "+y+"\tcount: "+count)
-				count
-			}
-			else max
+			max = if (count > max) count else max
+			println((System.currentTimeMillis() - start)+"ms "+"\tmax: "+max+"\ty: "+y+"\tcount: "+count)
 			
 			y = 3 * y
 			count = countForY(y)
-			max = if (count > max) {
-				println((System.currentTimeMillis() - start)+"ms "+"\ty: "+y+"\tcount: "+count)
-				count
-			}
-			else max
+			max = if (count > max) count else max
+			println((System.currentTimeMillis() - start)+"ms "+"\tmax: "+max+"\ty: "+y+"\tcount: "+count)
 			
 			i += 1
 		} while (count != 450)
@@ -48,17 +42,12 @@ object Problem354 {
 			n <- -maxN to maxN		// the range where det >= 0
 			root <- asInt(sqrt(det(n, y).doubleValue))
 			if ((n & 1) == (root & 1))
-		} {
+		}
+		{
 			if (root == 0)
-			{
-				//solutions = (n/2, n) :: solutions
 				count += 1
-			}
 			else
-			{
-				//solutions = ((n + root) / 2, n) :: ((n - root) / 2, n) :: solutions
 				count += 2
-			}
 		}
 		
 		count
