@@ -1,4 +1,4 @@
-import sun.reflect.generics.reflectiveObjects.NotImplementedException
+package projecteuler.problems
 
 import util.prime.PrimeUtil._
 
