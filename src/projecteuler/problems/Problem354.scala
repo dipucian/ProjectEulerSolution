@@ -8,27 +8,23 @@ object Problem354 {
 		val start = System.currentTimeMillis()
 		
 		var solutions = List[Pair[Int, Int]]()
-		var max = 0
-		var count = 0
+		var max = Pair[scala.Int, Int](0, 0)
 		var i:Int = 0
-		var y:Int = 0
 		do {
-			y = i * i
-			count = countForY(y)
-			max = if (count > max) count else max
-			println((System.currentTimeMillis() - start)+"ms "+"\tmax: "+max+"\ty: "+y+"\tcount: "+count)
+			val y1 = i * i
+			val count1 = countForY(y1)
+			max = if (count1 > max._1) (count1, y1) else max
 			
-			y = 3 * y
-			count = countForY(y)
-			max = if (count > max) count else max
-			println((System.currentTimeMillis() - start)+"ms "+"\tmax: "+max+"\ty: "+y+"\tcount: "+count)
+			val y2 = 3 * y1
+			val count2 = countForY(y2)
+			max = if (count2 > max._1) (count2, y2) else max
+			
+			println((System.currentTimeMillis() - start)+"ms\ti: "+i+"\tmax: "+max+"\ty: "+y1+"\tcount: "+count1+"\t3y: "+y2+"\tcount: "+count2)
 			
 			i += 1
-		} while (count != 450)
+		} while (max._1 != 450)
 		
-		println(y)
-		//println(solutions.length)
-		//println(solutions)
+		println(max)
 		
 		println("runtime: "+(System.currentTimeMillis() - start)+"ms.")
 	}
