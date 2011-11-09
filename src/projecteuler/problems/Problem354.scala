@@ -9,9 +9,10 @@ object Problem354 {
 		
 		var solutions = List[Pair[Int, Int]]()
 		var max = Pair[scala.Int, Int](0, 0)
-		var i:Int = 0
+		var i:Int = 16
 		do {
-			val y1 = i * i
+			//val y1 = i * i
+			val y1 = i
 			val count1 = countForY(y1)
 			max = if (count1 > max._1) (count1, y1) else max
 			
@@ -21,7 +22,7 @@ object Problem354 {
 			
 			println((System.currentTimeMillis() - start)+"ms\ti: "+i+"\tmax: "+max+"\ty: "+y1+"\tcount: "+count1+"\t3y: "+y2+"\tcount: "+count2)
 			
-			i += 1
+			i *= 3
 		} while (max._1 != 450)
 		
 		println(max)
