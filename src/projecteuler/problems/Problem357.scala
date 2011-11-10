@@ -10,9 +10,9 @@ object Problem357 {
 		
 		import util.prime.PrimeUtil._
 		
-		var sum = 0L
+		var sum = 1 + 2 +6L
 		for {
-			n <- 2 until 100000000 by 2
+			n <- 10 until 100000000 by 4
 			if (isPrimeGenerator(n))
 		}
 		{

@@ -58,15 +58,13 @@ object PrimeUtil {
 	def pairFactorize(n: Long): Seq[(Long, Long)] = {
 		val pfs = primeFactorize(n)
 		val preMulti = pfs map {
-			_ match {
-				case (p, m) =>
-					var y = 1L
-					for (i <- 0L to m) yield {
-						val t = y
-						y *= p
-						t
-					}
-			}
+			case (p, m) =>
+				var y = 1L
+				for (i <- 0L to m) yield {
+					val t = y
+					y *= p
+					t
+				}
 		}
 
 		def generatePair(ls: List[IndexedSeq[Long]]): Seq[(Long, Long)] = {
@@ -85,8 +83,11 @@ object PrimeUtil {
 	}
 
 	def isPrimeGenerator(n: Long): Boolean = {
-		if (n % 2 == 1)
-			false // odd number can't be prime generator
+		if (n == 1) true
+		else if (n % 2 == 1 || n % 4 == 0)
+			// if n is odd, n + 1 must not be prime
+			// if n % 4 == 0, n = 2xa x 2xb, 2xa + 2xb must not be prime
+			false
 		else if (isPrime(n + 1))
 			pairFactorize(n).tail forall { pair => isPrime(pair._1 + pair._2) }
 		else
@@ -137,13 +138,12 @@ object PrimeUtilTest {
 					} yield (head(i), head(l-i))
 					*/
 				case head :: tail =>
-					val l = head.length - 1
+					val l = head.length
 					for {
 						i <- 0 to l / 2
 						res <- fn4(tail)
 					} yield {
-						//val res = fn4(tail)
-						(head(i) * res._1, head(l - i) * res._2)
+						(head(i) * res._1, head(l - i - 1) * res._2)
 					}
 			}
 		}
@@ -177,14 +177,14 @@ object PrimeUtilTest {
 		println(fn(preMulti))
 		println(fn2(preMulti))
 		println(fn3(range))
-		
+
 		testPrimeFactorize()
 	}
 
 	def testPrimeFactorize() {
-		
+
 		println("testing primeFactorize...")
-		
+
 		for {
 			i <- 1 to 1000000
 		} {
@@ -194,8 +194,8 @@ object PrimeUtilTest {
 					case (p, m) => math.pow(p, m)
 				}
 			} product
-			
-			assert(orig.toInt == i, i+": "+pfs)
+
+			assert(orig.toInt == i, i + ": " + pfs)
 		}
 	}
 }
