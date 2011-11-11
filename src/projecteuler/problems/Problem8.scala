@@ -1,4 +1,5 @@
 package projecteuler.problems
+import scala.annotation.tailrec
 
 object Problem8 {
 	def main(args: Array[String]): Unit = {
@@ -23,8 +24,33 @@ object Problem8 {
 			"84580156166097919133875499200524063689912560717606",
 			"05886116467109405077541002256983155200055935729725",
 			"71636269561882670428252483600823257530420752963450")
-		
+
 		println("Find the greatest product of five consecutive digits in the 1000-digit number.")
 		digits foreach println
+
+		import math._
+
+		val maxDigit = floor(log10(Long.MaxValue)).toInt
+		val digitsArr = digits flatMap {
+			_.grouped(maxDigit) flatMap { l =>
+				digitize(l.toLong)
+			}
+		}
+		
+		println(digitsArr)
+	}
+
+	def digitize(l: Long): Vector[Byte] = {
+
+		@tailrec
+		def extractLastDigit(l: Long, acc: Vector[Byte]): Vector[Byte] = {
+			if (l < 10) l.toByte +: acc
+			else {
+				val mod = (l % 10).toByte
+				extractLastDigit(l / 10, mod +: acc)
+			}
+		}
+
+		extractLastDigit(l, Vector.empty)
 	}
 }
