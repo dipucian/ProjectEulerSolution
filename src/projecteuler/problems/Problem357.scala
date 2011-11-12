@@ -9,8 +9,7 @@ object Problem357 {
 		println(problemStatement)
 
 		import util.prime.PrimeUtil._
-		import util.Timer.time
-
+		
 		time {
 			var sum = 1 + 2 + 6L
 			for {
