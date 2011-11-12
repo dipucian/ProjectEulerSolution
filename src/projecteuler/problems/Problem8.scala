@@ -52,7 +52,10 @@ object Problem8 {
 		}
 		{
 			val head = queue.dequeue
-			if (n < head) max = head * queue.product
+			if (n < head) {
+				val m = head * queue.product
+				if (m > max) max = m
+			}
 			queue.enqueue(n)
 		}
 		
