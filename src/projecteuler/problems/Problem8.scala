@@ -29,8 +29,6 @@ object Problem8 {
 		orig foreach println
 		println
 
-		import util.Timer.time
-		
 		time {
 			val digitStr = orig.mkString.split("0").filter(_.length >= 5)
 			println("Answer: "+ (digitStr map fiveDigitMax).max)
