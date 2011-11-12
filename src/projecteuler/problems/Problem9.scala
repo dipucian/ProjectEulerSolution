@@ -8,8 +8,10 @@ object Problem9 {
 				"\nFind the product abc."
 		println(problemStatement)
 		
-		val triplet = find(1000)
-		println("Answer: "+ (triplet._1 * triplet._2 * triplet._3))
+		time {
+			val triplet = find(1000)
+			println("Answer: "+ (triplet._1 * triplet._2 * triplet._3))
+		}
 	}
 	
 	def find(sum:Int):(Int, Int, Int) = {

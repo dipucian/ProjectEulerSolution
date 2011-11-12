@@ -2,8 +2,9 @@ package util
 
 object Timer {
 	def time(fn: => Unit) = {
-		var start = System.currentTimeMillis
+		val start = System.currentTimeMillis
 		fn
-		println((System.currentTimeMillis - start)+"ms.")
+		val duration = System.currentTimeMillis - start
+		println(duration+"ms.")
 	}
 }

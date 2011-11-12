@@ -6,7 +6,10 @@ object Problem3 {
 	def main(args: Array[String]): Unit = {
 		val n: Long = 600851475143L;
 		println("What is the largest prime factor of the number " + n + " ?")
-		println(largestPrimeFactor(n))
+		
+		time {
+			println("Answer: "+largestPrimeFactor(n))
+		}
 	}
 
 	private def largestPrimeFactor(n: Long): Long = {
