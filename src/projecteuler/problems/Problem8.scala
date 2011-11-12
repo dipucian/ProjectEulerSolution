@@ -3,7 +3,7 @@ import scala.annotation.tailrec
 
 object Problem8 {
 	def main(args: Array[String]): Unit = {
-		val digits = List(
+		val orig = List(
 			"73167176531330624919225119674426574742355349194934",
 			"96983520312774506326239578318016984801869478851843",
 			"85861560789112949495459501737958331952853208805511",
@@ -26,20 +26,39 @@ object Problem8 {
 			"71636269561882670428252483600823257530420752963450")
 
 		println("Find the greatest product of five consecutive digits in the 1000-digit number.")
-		digits foreach println
+		orig foreach println
+		println
 
-		import math._
-
-		val maxDigit = floor(log10(Long.MaxValue)).toInt
-		val digitsArr = digits flatMap {
-			_.grouped(maxDigit) flatMap { l =>
-				digitize(l.toLong)
-			}
+		import util.Timer.time
+		
+		time {
+			val digitStr = orig.mkString.split("0").filter(_.length >= 5)
+			println("Answer: "+ (digitStr map fiveDigitMax).max)
+		}
+	}
+	
+	def fiveDigitMax(s: String): Int = {
+		import scala.collection.mutable.Queue
+		
+		val pair = s.splitAt(5)
+		val zero = '0'.toInt
+		val queue = new Queue ++= pair._1.map(_.toInt - zero)
+		
+		var max = queue.product
+		
+		for {
+			c <- pair._2
+			n = c.toInt - zero
+		}
+		{
+			val head = queue.dequeue
+			if (n < head) max = head * queue.product
+			queue.enqueue(n)
 		}
 		
-		println(digitsArr)
+		max
 	}
-
+	
 	def digitize(l: Long): Vector[Byte] = {
 
 		@tailrec
