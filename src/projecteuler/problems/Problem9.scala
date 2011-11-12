@@ -8,7 +8,6 @@ object Problem9 {
 				"\nFind the product abc."
 		println(problemStatement)
 		
-		import util.Timer.time
 		time {
 			val triplet = find(1000)
 			println("Answer: "+ (triplet._1 * triplet._2 * triplet._3))

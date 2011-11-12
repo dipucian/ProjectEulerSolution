@@ -7,7 +7,6 @@ object Problem3 {
 		val n: Long = 600851475143L;
 		println("What is the largest prime factor of the number " + n + " ?")
 		
-		import util.Timer.time
 		time {
 			println("Answer: "+largestPrimeFactor(n))
 		}
