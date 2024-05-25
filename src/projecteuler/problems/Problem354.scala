@@ -4,26 +4,27 @@ import math._
 import math.{BigInt => Int}
 
 object Problem354 {
+	case class Pair[A, B](_1:A, _2:B)
 	def main(args: Array[String]): Unit = {
 		val start = System.currentTimeMillis()
 		
 		var solutions = List[Pair[Int, Int]]()
 		var max = Pair[scala.Int, Int](0, 0)
 		var i:Int = 16
-		do {
-			//val y1 = i * i
-			val y1 = i
-			val count1 = countForY(y1)
-			max = if (count1 > max._1) (count1, y1) else max
-			
-			val y2 = 3 * y1
-			val count2 = countForY(y2)
-			max = if (count2 > max._1) (count2, y2) else max
-			
-			println((System.currentTimeMillis() - start)+"ms\ti: "+i+"\tmax: "+max+"\ty: "+y1+"\tcount: "+count1+"\t3y: "+y2+"\tcount: "+count2)
-			
-			i *= 3
-		} while (max._1 != 450)
+//		do {
+//			//val y1 = i * i
+//			val y1 = i
+//			val count1 = countForY(y1)
+//			max = if (count1 > max._1) (count1, y1) else max
+//
+//			val y2 = 3 * y1
+//			val count2 = countForY(y2)
+//			max = if (count2 > max._1) (count2, y2) else max
+//
+//			println((System.currentTimeMillis() - start)+"ms\ti: "+i+"\tmax: "+max+"\ty: "+y1+"\tcount: "+count1+"\t3y: "+y2+"\tcount: "+count2)
+//
+//			i *= 3
+//		} while (max._1 != 450)
 		
 		println(max)
 		
@@ -69,12 +70,12 @@ object Problem354 {
 	*/
 	private def modf (d:Double): Pair[Int, Double] = {
 		val intPart = d.intValue
-		(intPart, d - intPart)
+		Pair(intPart, d - intPart)
 	}
 	private def isInt (d:Double): Boolean = modf(d)._2 == 0
 	private def asInt (d:Double): Option[Int] = {
 		modf(d) match {
-			case (int, frac) if frac == 0 => Some(int)
+			case Pair(int, frac) if frac == 0 => Some(int)
 			case _ => None
 		}
 	}

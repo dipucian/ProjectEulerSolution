@@ -1,13 +1,14 @@
 package util.prime
 
-import scala.math._
+import scala.language.postfixOps
+import scala.math.*
 
 object PrimeUtil {
 
 	val allPrimes = primes()
 	def primes(start: Int = 2): Stream[Long] = {
 		if (start < 8)
-			return 2 #:: 3 #:: 5 #:: 7 #:: primes(11)
+			return 2L #:: 3L #:: 5L #:: 7L #:: primes(11)
 
 		var n = if (start % 2 == 0) start + 1 else start
 		while (!isPrime(n))
@@ -98,7 +99,7 @@ object PrimeUtil {
 object PrimeUtilTest {
 	import PrimeUtil._
 
-	def main(args: Array[String]) {
+	def main(args: Array[String]) = {
 
 		val n = 4
 		println("primeFactorize(" + n + "): " + primeFactorize(n))
@@ -181,7 +182,7 @@ object PrimeUtilTest {
 		testPrimeFactorize()
 	}
 
-	def testPrimeFactorize() {
+	def testPrimeFactorize() = {
 
 		println("testing primeFactorize...")
 
